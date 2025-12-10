@@ -35,7 +35,7 @@ public class ContactController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Contact> updateContact(@PathVariable long id, @RequestBody Contact updateContact){
-        return  updateContact(id,updateContact);
+        return  service.updateContact(id,updateContact);
     }
 
 }

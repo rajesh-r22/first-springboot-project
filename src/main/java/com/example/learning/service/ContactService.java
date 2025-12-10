@@ -4,6 +4,7 @@ import com.example.learning.entity.Contact;
 import com.example.learning.repository.ContactRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -12,14 +13,16 @@ public class ContactService {
 
     private final ContactRepository repo;
 
+
     public ContactService(ContactRepository repo){
         this.repo=repo;
     }
-
+    @Transactional
     public Contact addContact(@RequestBody Contact contact){
         return repo.save(contact);
     }
 
+    @Transactional(readOnly = true)
     public ResponseEntity<Contact> getContact(@PathVariable long id){
         return repo.findById(id)
                 .map(ResponseEntity::ok)
@@ -37,6 +40,7 @@ public class ContactService {
         }
     }
 
+    @Transactional
     public ResponseEntity<Contact> updateContact(@PathVariable long id, @RequestBody Contact updateContact){
         return repo.findById(id)
                 .map(existingContact->{
