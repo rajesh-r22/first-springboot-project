@@ -27,8 +27,14 @@ public class ContactService {
 
     }
 
-    public void deleteContact(@PathVariable long id){
-        repo.deleteById(id);
+    @Transactional
+    public ResponseEntity<Void> deleteContact(@PathVariable long id){
+        if(repo.existsById(id)){
+            repo.deleteById(id);
+            return ResponseEntity.noContent().build();
+        }else{
+            return ResponseEntity.notFound().build();
+        }
     }
 
     public ResponseEntity<Contact> updateContact(@PathVariable long id, @RequestBody Contact updateContact){
