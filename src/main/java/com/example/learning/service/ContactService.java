@@ -2,6 +2,7 @@ package com.example.learning.service;
 
 import com.example.learning.entity.Contact;
 import com.example.learning.repository.ContactRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,9 +18,12 @@ public class ContactService {
     public ContactService(ContactRepository repo){
         this.repo=repo;
     }
+
     @Transactional
-    public Contact addContact(@RequestBody Contact contact){
-        return repo.save(contact);
+    public ResponseEntity<Contact> addContact(@RequestBody Contact contact){
+        Contact saved= repo.save(contact);
+        return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+
     }
 
     @Transactional(readOnly = true)
