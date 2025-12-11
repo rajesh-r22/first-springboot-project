@@ -6,6 +6,8 @@ import com.example.learning.service.ContactService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class ContactController {
 
@@ -36,6 +38,11 @@ public class ContactController {
     @PutMapping("/{id}")
     public ResponseEntity<Contact> updateContact(@PathVariable long id, @RequestBody Contact updateContact){
         return  service.updateContact(id,updateContact);
+    }
+
+    @GetMapping("/name/{name}")
+    public ResponseEntity<List<Contact>> searchByName(@PathVariable String name){
+        return service.serachByName(name);
     }
 
 }

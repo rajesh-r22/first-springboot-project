@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.List;
+
 @Service
 public class ContactService {
 
@@ -20,14 +22,14 @@ public class ContactService {
     }
 
     @Transactional
-    public ResponseEntity<Contact> addContact(@RequestBody Contact contact){
+    public ResponseEntity<Contact> addContact( Contact contact){
         Contact saved= repo.save(contact);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
 
     }
 
     @Transactional(readOnly = true)
-    public ResponseEntity<Contact> getContact(@PathVariable long id){
+    public ResponseEntity<Contact> getContact( long id){
         return repo.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -35,7 +37,7 @@ public class ContactService {
     }
 
     @Transactional
-    public ResponseEntity<Void> deleteContact(@PathVariable long id){
+    public ResponseEntity<Void> deleteContact( long id){
         if(repo.existsById(id)){
             repo.deleteById(id);
             return ResponseEntity.noContent().build();
@@ -45,7 +47,7 @@ public class ContactService {
     }
 
     @Transactional
-    public ResponseEntity<Contact> updateContact(@PathVariable long id, @RequestBody Contact updateContact){
+    public ResponseEntity<Contact> updateContact( long id,  Contact updateContact){
         return repo.findById(id)
                 .map(existingContact->{
                     existingContact.setName(updateContact.getName());
@@ -55,6 +57,13 @@ public class ContactService {
                     return ResponseEntity.ok(updated);
                 })
                 .orElse(ResponseEntity.notFound().build());
+    }
+    public ResponseEntity<List<Contact>> serachByName(String name){
+        List<Contact> contacts=repo.findByName(name);
+        if(contacts.isEmpty()){
+            ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(contacts);
     }
 
 
