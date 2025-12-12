@@ -6,8 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
+import com.example.learning.dto.ContactDto;
 
 import java.util.List;
 
@@ -21,17 +20,35 @@ public class ContactService {
         this.repo=repo;
     }
 
-    @Transactional
-    public ResponseEntity<Contact> addContact( Contact contact){
-        Contact saved= repo.save(contact);
-        return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+//  DTO -> Entity
+    public Contact ConvertDtoToEntity(ContactDto dto){
+        Contact contact=new Contact();
+        contact.setName(dto.getName());
+        contact.setEmail(dto.getEmail());
+        contact.setPhoneNo(dto.getPhoneNo());
+        return contact;
+    }
+//  Entity -> DTO
+    public ContactDto ConvertEntityToDto(Contact contact){
+        ContactDto dto= new ContactDto();
+        dto.setName(contact.getName());
+        dto.setEmail(contact.getEmail());
+        dto.setPhoneNo(contact.getPhoneNo());
+        return dto;
+    }
 
+    @Transactional
+    public ResponseEntity<ContactDto> addContact(ContactDto contactDto){
+        Contact contact=ConvertDtoToEntity(contactDto);
+        Contact saved= repo.save(contact);
+        ContactDto responseDto= ConvertEntityToDto(saved);
+        return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
     }
 
     @Transactional(readOnly = true)
-    public ResponseEntity<Contact> getContact( long id){
+    public ResponseEntity<ContactDto> getContact( long id){
         return repo.findById(id)
-                .map(ResponseEntity::ok)
+                .map(contact -> ResponseEntity.ok(ConvertEntityToDto(contact)))
                 .orElse(ResponseEntity.notFound().build());
 
     }
@@ -46,18 +63,20 @@ public class ContactService {
         }
     }
 
+//  DTO -> Entity
     @Transactional
-    public ResponseEntity<Contact> updateContact( long id,  Contact updateContact){
+    public ResponseEntity<Contact> updateContact( long id,  ContactDto updateDto){
         return repo.findById(id)
                 .map(existingContact->{
-                    existingContact.setName(updateContact.getName());
-                    existingContact.setEmail(updateContact.getEmail());
-                    existingContact.setPhoneNo(updateContact.getPhoneNo());
+                    existingContact.setName(updateDto.getName());
+                    existingContact.setEmail(updateDto.getEmail());
+                    existingContact.setPhoneNo(updateDto.getPhoneNo());
                     Contact updated=repo.save(existingContact);
                     return ResponseEntity.ok(updated);
                 })
                 .orElse(ResponseEntity.notFound().build());
     }
+
     public ResponseEntity<List<Contact>> serachByName(String name){
         List<Contact> contacts=repo.findByName(name);
         if(contacts.isEmpty()){
@@ -65,6 +84,8 @@ public class ContactService {
         }
         return ResponseEntity.ok(contacts);
     }
+
+
 
 
 

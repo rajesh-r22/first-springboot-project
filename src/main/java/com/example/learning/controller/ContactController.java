@@ -1,8 +1,9 @@
 package com.example.learning.controller;
 
+import com.example.learning.dto.ContactDto;
 import com.example.learning.entity.Contact;
-import com.example.learning.repository.ContactRepository;
 import com.example.learning.service.ContactService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,12 +20,12 @@ public class ContactController {
 
 
     @PostMapping("/contacts")
-    public ResponseEntity<Contact> addContact(@RequestBody Contact contact){
-        return service.addContact(contact);
+    public ResponseEntity<ContactDto> addContact( @Valid  @RequestBody ContactDto contactDto){
+        return service.addContact(contactDto);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Contact> getContact(@PathVariable long id){
+    public ResponseEntity<ContactDto> getContact(@PathVariable long id){
         System.out.println("this is working");
         return service.getContact(id);
 
@@ -36,8 +37,8 @@ public class ContactController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Contact> updateContact(@PathVariable long id, @RequestBody Contact updateContact){
-        return  service.updateContact(id,updateContact);
+    public ResponseEntity<Contact> updateContact(@Valid @PathVariable long id, @RequestBody ContactDto  updateDto){
+        return  service.updateContact(id,updateDto);
     }
 
     @GetMapping("/name/{name}")
