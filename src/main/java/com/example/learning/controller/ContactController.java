@@ -26,7 +26,6 @@ public class ContactController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ContactDto> getContact(@PathVariable long id){
-        System.out.println("this is working");
         return service.getContact(id);
 
     }
