@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ContactDto {
-    @NotBlank(message = "Name cannot br blank")
+    @NotBlank(message = "Name cannot be blank")
     private String name;
 
     @Email(message = "Email should be valid")
