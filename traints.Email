@@ -1,0 +1,66 @@
+[33mcommit 6388f2e291fb460f0f46a6638716e858aa489b3a[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: rajesh-r22 <itsmerajeshreddy01@gmail.com>
+Date:   Sat Dec 13 04:14:22 2025 +0530
+
+    fix: delete unwanted log printing in ContactController
+
+[33mcommit f99180321c04513e2b0efa991e0e5fe839ea6537[m
+Author: rajesh-r22 <itsmerajeshreddy01@gmail.com>
+Date:   Sat Dec 13 03:43:14 2025 +0530
+
+     fix: correct spelling mistake in ContactDto validation
+
+[33mcommit bd178a5f27f05ce939161feb2071a04e1f355fdc[m
+Author: rajesh-r22 <itsmerajeshreddy01@gmail.com>
+Date:   Sat Dec 13 03:38:38 2025 +0530
+
+     feat: add ContactDto with validation and integrate into service & controller
+    
+     - Created ContactDto class with @NotBlank, @Email, and @Pattern validations
+     - Updated ContactService to handle DTO → Entity conversion and Entity → DTO response
+     - Modified ContactController to accept and return DTO objects
+     - Ensured validation works on incoming requests
+
+[33mcommit 82773ef22b16d29fa7fbe4b2de511e827cd0cc91[m
+Author: rajesh-r22 <itsmerajeshreddy01@gmail.com>
+Date:   Fri Dec 12 04:08:47 2025 +0530
+
+    feat: add search by name endpoint
+    refactor: remove unnecessary annotations from service layer
+
+[33mcommit 007a155e7c1894e59815a5a16a0851efd38f4bbd[m
+Author: rajesh-r22 <itsmerajeshreddy01@gmail.com>
+Date:   Fri Dec 12 02:23:33 2025 +0530
+
+    feat: add search by name endpoint
+    refactor: remove unnecessary annotations from service layer
+
+[33mcommit 4fbb407d14e6fdb7fb52abd8bf082435c6c9a96d[m
+Author: rajesh-r22 <itsmerajeshreddy01@gmail.com>
+Date:   Fri Dec 12 01:29:27 2025 +0530
+
+     Improve POST endpoint: add ResponseEntity and return correct 201 status
+
+[33mcommit 009c33773401487d29f856053285c3698a8d0aec[m
+Author: rajesh-r22 <itsmerajeshreddy01@gmail.com>
+Date:   Wed Dec 10 20:15:49 2025 +0530
+
+    Add service for delete and Transactional notation in service layer
+
+[33mcommit 9f82831652cf72c39803bb1105a8c057f78789b4[m
+Author: rajesh-r22 <itsmerajeshreddy01@gmail.com>
+Date:   Wed Dec 10 19:48:53 2025 +0530
+
+    Add ResponseEntity to delete contact
+
+[33mcommit 72ee8da1b5016f93b1ce061a9c28382bff782e6f[m
+Author: rajesh-r22 <itsmerajeshreddy01@gmail.com>
+Date:   Wed Dec 10 17:55:18 2025 +0530
+
+    Add ContactService and modify ContactController according to ContactService
+
+[33mcommit 91ae317ce7fb382f7645a2c3eb1ccdfc96b62d12[m
+Author: rajesh-r22 <itsmerajeshreddy01@gmail.com>
+Date:   Wed Dec 10 15:57:35 2025 +0530
+
+    first commit
