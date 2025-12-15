@@ -80,7 +80,7 @@ public class ContactService {
     public ResponseEntity<List<Contact>> serachByName(String name){
         List<Contact> contacts=repo.findByName(name);
         if(contacts.isEmpty()){
-            ResponseEntity.notFound().build();
+            throw new ResourceNotFoundException("Contact not found with name : "+name);
         }
         return ResponseEntity.ok(contacts);
     }
