@@ -1,12 +1,15 @@
 package com.example.learning.service;
 
 import com.example.learning.entity.Contact;
+import com.example.learning.exception.BadRequestException;
+import com.example.learning.exception.ResourceNotFoundException;
 import com.example.learning.repository.ContactRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.example.learning.dto.ContactDto;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -39,28 +42,25 @@ public class ContactService {
 
     @Transactional
     public ResponseEntity<ContactDto> addContact(ContactDto contactDto){
-        Contact contact=ConvertDtoToEntity(contactDto);
-        Contact saved= repo.save(contact);
-        ContactDto responseDto= ConvertEntityToDto(saved);
-        return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
+         Contact contact=ConvertDtoToEntity(contactDto);
+         Contact saved= repo.save(contact);
+         ContactDto dtoResponse= ConvertEntityToDto(saved);
+         return ResponseEntity.status(HttpStatus.CREATED).body(dtoResponse);
     }
 
     @Transactional(readOnly = true)
     public ResponseEntity<ContactDto> getContact( long id){
-        return repo.findById(id)
-                .map(contact -> ResponseEntity.ok(ConvertEntityToDto(contact)))
-                .orElse(ResponseEntity.notFound().build());
-
+        Contact contact=  repo.findById(id)
+                .orElseThrow(()-> new ResourceNotFoundException("Contact not found with id: "+ id));
+        return ResponseEntity.ok(ConvertEntityToDto(contact));
     }
 
     @Transactional
     public ResponseEntity<Void> deleteContact( long id){
-        if(repo.existsById(id)){
-            repo.deleteById(id);
-            return ResponseEntity.noContent().build();
-        }else{
-            return ResponseEntity.notFound().build();
-        }
+         if(!repo.existsById(id)){
+             throw new ResourceNotFoundException("Contact not found by id: "+id);
+         }
+         return ResponseEntity.noContent().build();
     }
 
 //  DTO -> Entity
@@ -74,7 +74,7 @@ public class ContactService {
                     Contact updated=repo.save(existingContact);
                     return ResponseEntity.ok(updated);
                 })
-                .orElse(ResponseEntity.notFound().build());
+                .orElseThrow(()-> new BadRequestException("Contact not found by id: "+id));
     }
 
     public ResponseEntity<List<Contact>> serachByName(String name){
