@@ -43,7 +43,7 @@ public class ContactController {
 
     @GetMapping("/name/{name}")
     public ResponseEntity<List<Contact>> searchByName(@PathVariable String name){
-        return service.serachByName(name);
+        return service.searchByName(name);
     }
 
 }

@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.example.learning.dto.ContactDto;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -77,7 +76,7 @@ public class ContactService {
                 .orElseThrow(()-> new BadRequestException("Contact not found by id: "+id));
     }
 
-    public ResponseEntity<List<Contact>> serachByName(String name){
+    public ResponseEntity<List<Contact>> searchByName(String name){
         List<Contact> contacts=repo.findByName(name);
         if(contacts.isEmpty()){
             throw new ResourceNotFoundException("Contact not found with name : "+name);
