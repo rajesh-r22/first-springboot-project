@@ -13,4 +13,5 @@ public interface ContactRepository extends JpaRepository<Contact,Long> {
     List<Contact> findByName(String  name);
 
     boolean existsByEmail(@Email(message = "Email should be valid") String email);
+    boolean existsByName(@Name("Name already exists")String name);
 }
