@@ -41,10 +41,13 @@ public class ContactService {
 
     @Transactional
     public ResponseEntity<ContactDto> addContact(ContactDto contactDto){
-         Contact contact=ConvertDtoToEntity(contactDto);
-         Contact saved= repo.save(contact);
-         ContactDto dtoResponse= ConvertEntityToDto(saved);
-         return ResponseEntity.status(HttpStatus.CREATED).body(dtoResponse);
+        if(repo.existsByEmail(contactDto.getEmail())){
+            throw new BadRequestException("Email already exist by email :"+ contactDto.getEmail());
+        }
+        Contact contact=ConvertDtoToEntity(contactDto);
+        Contact saved= repo.save(contact);
+        ContactDto dtoResponse= ConvertEntityToDto(saved);
+        return ResponseEntity.status(HttpStatus.CREATED).body(dtoResponse);
     }
 
     @Transactional(readOnly = true)
