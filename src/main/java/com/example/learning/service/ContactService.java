@@ -47,6 +47,9 @@ public class ContactService {
         if(repo.existsByEmail(contactDto.getEmail())){
             throw new BadRequestException("Email already exist by email :"+ contactDto.getEmail());
         }
+        if(repo.existsByPhoneNo(contactDto.getPhoneNo())){
+            throw new BadRequestException("Duplicate phone number is not allowed");
+        }
         Contact contact=ConvertDtoToEntity(contactDto);
         Contact saved= repo.save(contact);
         ContactDto dtoResponse= ConvertEntityToDto(saved);
