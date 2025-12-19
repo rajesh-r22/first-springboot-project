@@ -25,23 +25,23 @@ public class ContactController {
         return service.addContact(contactDto);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/contacts/{id}")
     public ResponseEntity<ContactDto> getContact(@PathVariable long id){
         return service.getContact(id);
 
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/contacts/{id}")
     public void deleteContact(@PathVariable long id){
         service.deleteContact(id);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/contacts/{id}")
     public ResponseEntity<Contact> updateContact(@Valid @PathVariable long id, @RequestBody ContactDto  updateDto){
         return  service.updateContact(id,updateDto);
     }
 
-    @GetMapping("/name/{name}")
+    @GetMapping("/contacts/name/{name}")
     public ResponseEntity<List<Contact>> searchByName(@PathVariable String name){
         return service.searchByName(name);
     }
