@@ -18,6 +18,7 @@ public class UserService {
         if(userRepository.findByUsername(user.getUsername()).isPresent()){
             throw new RuntimeException("User already exist");
         }
+        user.setUsername(user.getUsername());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRole("ROLE_USER");
         return userRepository.save(user);

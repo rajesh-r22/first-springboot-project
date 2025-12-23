@@ -28,9 +28,11 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT,"/contacts/*").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE,"/contacts/*").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST,"/contacts").hasRole("ADMIN")
+                        .requestMatchers("/register","/login").permitAll()
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())
+                .formLogin(form->form.disable())
                 .build();
     }
 
