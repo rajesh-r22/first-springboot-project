@@ -3,6 +3,7 @@ package com.example.learning.service;
 import com.example.learning.entity.User;
 import com.example.learning.repository.UserRepository;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -10,7 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-@Data
+@RequiredArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
     private final UserRepository userRepository;
