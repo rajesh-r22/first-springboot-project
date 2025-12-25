@@ -32,8 +32,9 @@ public class ContactController {
     }
 
     @DeleteMapping("/contacts/{id}")
-    public void deleteContact(@PathVariable long id){
+    public ResponseEntity<Void> deleteContact(@PathVariable long id){
         service.deleteContact(id);
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/contacts/{id}")

@@ -68,7 +68,7 @@ public class ContactService {
          if(!repo.existsById(id)){
              throw new ResourceNotFoundException("Contact not found by id: "+id);
          }
-        ResponseEntity.noContent().build();
+         repo.deleteById(id);
     }
 
 //  DTO -> Entity
