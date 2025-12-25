@@ -64,11 +64,11 @@ public class ContactService {
     }
 
     @Transactional
-    public ResponseEntity<Void> deleteContact( long id){
+    public void deleteContact(long id){
          if(!repo.existsById(id)){
              throw new ResourceNotFoundException("Contact not found by id: "+id);
          }
-         return ResponseEntity.noContent().build();
+        ResponseEntity.noContent().build();
     }
 
 //  DTO -> Entity

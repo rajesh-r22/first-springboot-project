@@ -1,5 +1,4 @@
 package com.example.learning.config;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -25,6 +24,7 @@ public class SecurityConfig {
                 )
                 .authorizeHttpRequests(auth->auth
                         .requestMatchers(HttpMethod.GET,"/contacts/*","/contacts/name/**").hasAnyRole("USER","ADMIN")
+                        .requestMatchers(HttpMethod.GET,"/contacts/*").hasRole("USER")
                         .requestMatchers(HttpMethod.PUT,"/contacts/*").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE,"/contacts/*").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST,"/contacts").hasRole("ADMIN")
@@ -32,7 +32,6 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())
-                .formLogin(form->form.disable())
                 .build();
     }
 
