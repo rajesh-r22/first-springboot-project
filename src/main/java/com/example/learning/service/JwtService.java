@@ -1,20 +1,18 @@
 package com.example.learning.service;
-
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
-import javax.crypto.spec.SecretKeySpec;
 
 
 
-@Component
+
+@Service
 public class JwtService {
 
-    private final Key key= Keys.hmacShaKeyFor("verysecretkey@987654321".getBytes());
+    private final Key key=Keys.hmacShaKeyFor("verysecretkey65jhgdfbkjhrfhhkaf@987654321".getBytes());
     public String generateToken(String username){
         return Jwts.builder()
                 .subject(username)
