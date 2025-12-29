@@ -1,5 +1,4 @@
 package com.example.learning.service;
-
 import com.example.learning.entity.Contact;
 import com.example.learning.exception.BadRequestException;
 import com.example.learning.exception.ResourceNotFoundException;

@@ -1,5 +1,4 @@
 package com.example.learning.filter;
-
 import com.example.learning.service.CustomUserDetailsService;
 import com.example.learning.service.JwtService;
 import jakarta.servlet.FilterChain;
@@ -46,6 +45,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             }
 
         }
+
         filterChain.doFilter(request,response);
     }
 }
