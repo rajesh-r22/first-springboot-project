@@ -15,10 +15,13 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class RefreshTokenService {
+
     @Value("${app.jwt.refresh-expiration}")
-    private long refreshExpiration;
+     private long refreshExpiration;
+
     @Autowired
     private final RefreshTokenRepository refreshTokenRepository;
+
     @Autowired
     private final UserRepository userRepository;
 
