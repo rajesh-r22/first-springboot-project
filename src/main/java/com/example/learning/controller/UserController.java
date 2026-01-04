@@ -1,6 +1,6 @@
 package com.example.learning.controller;
 
-import com.example.learning.dto.AuthResponse;
+import com.example.learning.dto.JwtResponse;
 import com.example.learning.dto.LoginRequest;
 import com.example.learning.entity.RefreshToken;
 import com.example.learning.entity.User;
@@ -35,7 +35,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public AuthResponse login(@RequestBody LoginRequest request) {
+    public JwtResponse login(@RequestBody LoginRequest request) {
 
          Authentication authentication =
                 authenticationManager.authenticate(
@@ -52,7 +52,7 @@ public class UserController {
 
          RefreshToken refreshToken=refreshTokenService.createRefreshToken(user.getId());
 
-      return new AuthResponse(
+      return new JwtResponse(
               accessToken,
               refreshToken.getToken()
       );

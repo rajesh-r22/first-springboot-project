@@ -1,14 +1,15 @@
 package com.example.learning.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Data
-@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 public class JwtResponse {
-    private String response;
 
-    public JwtResponse(String response) {
-        this.response=response;
-    }
+    private String accessToken;
+    private String refreshToken;
+
 }
