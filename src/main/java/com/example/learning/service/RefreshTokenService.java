@@ -40,11 +40,20 @@ public class RefreshTokenService {
 
     }
 
-    public RefreshToken verifyExpiration(RefreshToken token){
-        if(token.getExpiryDate().isBefore(Instant.now())){
-            refreshTokenRepository.delete(token);
-            throw new RuntimeException("Refresh token expired!");
+    public RefreshToken verifyExpiration(String token) {
+
+        RefreshToken refreshToken =
+                refreshTokenRepository.findByToken(token)
+                        .orElseThrow(() ->
+                                new RuntimeException("Refresh token not found"));
+
+        if (refreshToken.getExpiryDate().isBefore(Instant.now())) {
+            refreshTokenRepository.delete(refreshToken);
+            throw new RuntimeException("Refresh token expired");
         }
-        return token;
+
+        return refreshToken;
     }
+
+
 }
