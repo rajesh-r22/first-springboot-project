@@ -1,7 +1,8 @@
 package com.example.learning.controller;
 
-import com.example.learning.dto.JwtResponse;
-import com.example.learning.dto.LoginRequest;
+import com.example.learning.dtoRequest.RefreshRequest;
+import com.example.learning.dtoResponse.JwtResponse;
+import com.example.learning.dtoResponse.LoginRequest;
 import com.example.learning.entity.RefreshToken;
 import com.example.learning.entity.User;
 import com.example.learning.repository.UserRepository;
@@ -24,7 +25,6 @@ public class UserController {
     private final UserService userService;
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
-    @Autowired
     private final RefreshTokenService refreshTokenService;
     private final UserRepository userRepository;
 
@@ -56,5 +56,12 @@ public class UserController {
               accessToken,
               refreshToken.getToken()
       );
+    }
+
+    @PostMapping("/refresh")
+    public JwtResponse refresh(@RequestBody RefreshRequest request){
+        RefreshToken rt=refreshTokenService.verifyExpiration(request.getRefreshToken());
+        String newAccessToken = jwtService.generateToken(rt.getUser().getUsername());
+        return new JwtResponse(newAccessToken,rt.getToken());
     }
 }

@@ -1,4 +1,4 @@
-package com.example.learning.dto;
+package com.example.learning.dtoResponse;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

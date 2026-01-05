@@ -1,5 +1,5 @@
 package com.example.learning.controller;
-import com.example.learning.dto.ContactDto;
+import com.example.learning.dtoResponse.ContactDto;
 import com.example.learning.entity.Contact;
 import com.example.learning.service.ContactService;
 import jakarta.validation.Valid;
