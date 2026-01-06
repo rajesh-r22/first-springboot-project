@@ -33,7 +33,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT,"/contacts/*").hasAuthority("ADMIN")
                         .requestMatchers(HttpMethod.DELETE,"/contacts/*").hasAuthority("ADMIN")
                         .requestMatchers(HttpMethod.POST,"/contacts").hasAuthority("ADMIN")
-                        .requestMatchers("/register","/login").permitAll()
+                        .requestMatchers("/register","/login","/refresh").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
