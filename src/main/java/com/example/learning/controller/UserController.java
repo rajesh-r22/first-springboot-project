@@ -37,6 +37,7 @@ public class UserController {
     @PostMapping("/login")
     public JwtResponse login(@RequestBody LoginRequest request) {
 
+//        authenticate karo username + password ko
          Authentication authentication =
                 authenticationManager.authenticate(
                         new UsernamePasswordAuthenticationToken(
@@ -45,13 +46,17 @@ public class UserController {
                         )
                 );
 
+//        user ko load karo dataBase se
          User user=userRepository.findByUsername(request.getUsername())
                  .orElseThrow(()->new RuntimeException("User not found"));
 
+//         access token generate karo
          String accessToken= jwtService.generateToken(request.getUsername());
 
+//         refresh token generate karo aur DB me save karo token ko
          RefreshToken refreshToken=refreshTokenService.createRefreshToken(user.getId());
 
+//         access token + refresh token return karo client ko
       return new JwtResponse(
               accessToken,
               refreshToken.getToken()
@@ -60,7 +65,10 @@ public class UserController {
 
     @PostMapping("/refresh")
     public JwtResponse refresh(@RequestBody RefreshRequest request){
+//        client refresh token dta hai hume , hum use verify kar te hai
         RefreshToken rt=refreshTokenService.verifyExpiration(request.getRefreshToken());
+
+//        verify success -> new access token generate kar ke dio
         String newAccessToken = jwtService.generateToken(rt.getUser().getUsername());
         return new JwtResponse(newAccessToken,rt.getToken());
     }
