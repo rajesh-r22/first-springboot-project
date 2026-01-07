@@ -3,20 +3,17 @@ import com.example.learning.dtoResponse.ContactDto;
 import com.example.learning.entity.Contact;
 import com.example.learning.service.ContactService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-
+@RequiredArgsConstructor
 public class ContactController {
 
     private final ContactService service;
-
-    public ContactController(ContactService service){
-        this.service=service;
-    }
 
 
     @PostMapping("/contacts")
