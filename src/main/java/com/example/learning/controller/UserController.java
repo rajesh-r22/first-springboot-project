@@ -10,7 +10,6 @@ import com.example.learning.service.JwtService;
 import com.example.learning.service.RefreshTokenService;
 import com.example.learning.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
