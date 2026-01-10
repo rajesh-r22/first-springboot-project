@@ -17,4 +17,8 @@ public class Contact {
     private String name;
     private String email;
     private String phoneNo;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 }
