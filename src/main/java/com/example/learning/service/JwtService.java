@@ -12,7 +12,7 @@ import java.util.Date;
 @Service
 public class JwtService {
 
-    private final Key key=Keys.hmacShaKeyFor(("@#$%^&*()!#@%%&^*." +
+    private final Key key=Keys.hmacShaKeyFor(("rajesh22@#$%^&*()!#@%%&^*." +
             "@987654321").getBytes());
     public String generateToken(String username){
         return Jwts.builder()
