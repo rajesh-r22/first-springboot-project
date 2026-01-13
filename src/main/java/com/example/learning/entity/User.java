@@ -25,7 +25,4 @@ public class User {
     @Column(nullable = false)
     private String role;
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
-    private List<Contact> contacts;
-
 }

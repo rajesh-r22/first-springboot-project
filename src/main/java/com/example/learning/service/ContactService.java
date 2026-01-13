@@ -3,7 +3,6 @@ import com.example.learning.entity.Contact;
 import com.example.learning.exception.BadRequestException;
 import com.example.learning.exception.ResourceNotFoundException;
 import com.example.learning.repository.ContactRepository;
-import com.example.learning.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +17,6 @@ import java.util.List;
 public class ContactService {
 
     private final ContactRepository repo;
-    private final UserRepository userRepo;
 
 
 //  DTO -> Entity

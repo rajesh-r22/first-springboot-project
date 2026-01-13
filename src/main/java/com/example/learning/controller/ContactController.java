@@ -5,9 +5,12 @@ import com.example.learning.service.ContactService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequiredArgsConstructor
@@ -18,6 +21,7 @@ public class ContactController {
 
     @PostMapping("/contacts")
     public ResponseEntity<ContactDto> addContact( @Valid  @RequestBody ContactDto contactDto){
+
         return service.addContact(contactDto);
     }
 
